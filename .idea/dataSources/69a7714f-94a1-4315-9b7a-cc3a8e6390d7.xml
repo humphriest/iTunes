@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - dt354jdbc@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="dt354jdbc">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="fyp"/>
+    <schema id="3" name="information_schema"/>
+    <schema id="4" name="mysql"/>
+    <schema id="5" name="performance_schema"/>
+    <schema id="6" name="sakila"/>
+    <schema id="7" name="sys"/>
+    <schema id="8" name="world"/>
+    <table id="9" parent="1" name="music"/>
+    <table id="10" parent="1" name="user"/>
+    <column id="11" parent="9" name="TRACK_ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="12" parent="9" name="ARTIST">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="13" parent="9" name="SONG_NAME">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="14" parent="9" name="PRIMARY">
+      <columns>TRACK_ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="15" parent="10" name="ID">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="16" parent="10" name="username">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="17" parent="10" name="password">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="18" parent="10" name="LastName">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="19" parent="10" name="FirstName">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="20" parent="10" name="email">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <key id="21" parent="10" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
