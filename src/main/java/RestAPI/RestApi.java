@@ -4,9 +4,7 @@ import entities.Track;
 import parser.XMLParser;
 import persistence.*;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +14,7 @@ import DAO.TrackDAO;
 @Path("/api")
 public class RestApi {
 
-    //private static SessionFactory sessionFactory;
     TrackDAO trackDao = new TrackDAO();
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/parse")
@@ -27,7 +23,7 @@ public class RestApi {
         List<Track> trackArrayList = xmlParser.getTracks();
 
         for(Track track: trackArrayList){
-            TrackDAO.createTrack(track);
+            trackDao.createTrack(track);
         }
         return "Parsed";
     }

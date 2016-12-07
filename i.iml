@@ -6,6 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="" />
         <datasource-mapping>
+          <factory-entry name="dt354jdbc" />
           <factory-entry name="dt354rel" />
           <factory-entry name="jpa-example" />
         </datasource-mapping>
