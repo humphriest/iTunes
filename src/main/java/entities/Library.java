@@ -8,7 +8,13 @@ public class Library {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id=0;
+    private int id;
+
+
+    private String libraryPersistenceId;
+
+    @ManyToOne
+    public User user;
 
     public Library() {
     }
@@ -17,28 +23,24 @@ public class Library {
         this.id = id;
     }
 
-    @Column
-    private int libraryPersistenceId;
+
 
     public int getId() {
         return id;
     }
 
-    public int getLibraryPersistenceId() {
+    public String getLibraryPersistenceId() {
         return libraryPersistenceId;
     }
 
-    public void setLibraryPersistenceId(int libraryPersistenceId) {
+    public void setLibraryPersistenceId(String libraryPersistenceId) {
         this.libraryPersistenceId = libraryPersistenceId;
     }
 
 
-    @ManyToOne
-    public User user;
-
     public User getUser(){ return user;}
 
-    public void setUser(){ this.user = user;}
+    public void setUser(User user){ this.user = user;}
 
 
 

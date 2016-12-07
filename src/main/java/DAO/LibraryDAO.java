@@ -33,7 +33,7 @@ public class LibraryDAO {
             return students.get(0);
     }*/
 
-    public static void createPlaylist(Library library){
+    public static void createLibrary(Library library){
         persistenceUtil.persist(library);
     }
 }

@@ -19,6 +19,10 @@
         <servlet-name>Resteasy</servlet-name>
         <url-pattern>/restful-services/*</url-pattern>
     </servlet-mapping>
+     
+     <welcome-file-list>
+         <welcome-file>index.jsp</welcome-file>
+     </welcome-file-list>
 
     <!--<context-param>
     <param-name>resteasy.scan</param-name>

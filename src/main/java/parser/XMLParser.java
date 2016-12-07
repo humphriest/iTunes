@@ -1,5 +1,6 @@
 package parser;
 
+import entities.Library;
 import entities.Playlist;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -24,11 +25,12 @@ public class XMLParser {
 
     public List<Playlist> getPlaylists() {
         List<Track> trackslist = getTracks();
+        System.out.println(trackslist.size()+" here");
         ArrayList<Playlist> playlists = new ArrayList<>();
         Playlist playlist;
 
-        ArrayList<Track> trackList = new ArrayList<>();
-        File fXmlFile = new File("C:\\Users\\Tim\\Desktop\\College\\DT354-4\\i\\new.xml");
+        ArrayList<Track> trackList;
+        File fXmlFile = new File("C:\\Users\\Tim\\Desktop\\College\\DT354-4\\i\\iTunes Music Library2.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -43,6 +45,7 @@ public class XMLParser {
             //System.out.println("playlist node list count is: " + playListNodeList.getLength());
             for (int i = 0; i < nodeList.getLength(); i++) {
                 playlist = new Playlist();
+                trackList = new ArrayList<>();
                 Node playlistNode = nodeList.item(i);
                 //System.out.println(playlistNode.getNodeName());
                 if (playlistNode.getNodeName().equals("dict")) {
@@ -73,10 +76,11 @@ public class XMLParser {
                                         String current = something.getNextSibling().getTextContent();
                                         //System.out.println(current);
                                         //System.out.println("Getting to here Test 1");
+                                        //System.out.println(current+" here");
                                         for (Track t : trackslist) {
-                                            //System.out.println(t.getSong_name());
-                                            //System.out.println("Getting to here Test 1");
                                             if (Integer.parseInt(current) == t.getTrack_id()) {
+                                                //System.out.println("hello");
+                                                //System.out.println(t.getTrack_id()+"   11111111111111111");
                                                 trackList.add(t);
                                                 playlist.setTracks(trackList);
                                             }
@@ -116,7 +120,7 @@ public class XMLParser {
 
             //ArrayList<Track> library = new ArrayList<>();
 
-            File fXmlFile = new File("C:\\Users\\Tim\\Desktop\\College\\DT354-4\\i\\new.xml");
+            File fXmlFile = new File("C:\\Users\\Tim\\Desktop\\College\\DT354-4\\i\\iTunes Music Library2.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
@@ -177,16 +181,54 @@ public class XMLParser {
 
             System.out.println("Count is: " + library.size());
 
-            for (Track t : library) {
+            /*for (Track t : library) {
                 System.out.println(t.getArtist());
                 System.out.println(t.getSong_name());
                 System.out.println("");
-            }
+            }*/
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return library;
     }
+
+    public Library getLibrary() {
+        Library library = null;
+
+        File fXmlFile = new File("C:\\Users\\Tim\\Desktop\\XmlParser\\iTunes Music Library2.xml");
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            doc.getDocumentElement().normalize();
+            String nameExpression = "//dict/key[. = 'Library Persistent ID']";
+            XPath xPath = XPathFactory.newInstance().newXPath();
+            NodeList nodeList = (NodeList) xPath.compile(nameExpression).evaluate(doc, XPathConstants.NODESET);
+
+            library = new Library();
+            System.out.println("node list count is:" + nodeList.getLength());
+            for(int i=0;i<nodeList.getLength();i++){
+                Node libNode = nodeList.item(0);
+                if(libNode.getTextContent().equals("Library Persistent ID")){
+                    System.out.println(libNode.getNextSibling().getTextContent()+" here");
+                    library.setLibraryPersistenceId(libNode.getNextSibling().getTextContent());
+                }
+            }
+            System.out.println(library.getLibraryPersistenceId());
+
+        } catch (ParserConfigurationException | IOException e) {
+            e.printStackTrace();
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+
+        return library;
+    }
+
 
 }

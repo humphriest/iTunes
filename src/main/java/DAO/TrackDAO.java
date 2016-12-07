@@ -6,8 +6,7 @@ import persistence.persistenceUtil;
 
 public class TrackDAO {
 
-
-    public static void createTrack(Track track){
+    public void createTrack(Track track){
         persistenceUtil.persist(track);
     }
 }

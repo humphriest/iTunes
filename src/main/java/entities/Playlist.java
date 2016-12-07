@@ -9,7 +9,7 @@ import java.util.List;
 
 @NamedQueries( {
         @NamedQuery(name = "playlist.findAll", query = "select o from Playlist o"),
-        @NamedQuery(name = "playlist.findByPlaylistName", query = "select o from Playlist o where o.playlistName=:playlistName"),
+        @NamedQuery(name = "playlist.findById", query = "select o from Playlist o where o.playlistId=:playlistId"),
 })
 
 @Entity
@@ -17,25 +17,28 @@ public class Playlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    private int id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Track> tracks;
 
     private int playlistId;
     private String playlistPersistenceId;
     private String playlistName;
 
+    @ManyToOne
+    private Library library;
 
-    @ManyToMany
-    private List<Track> tracks;
 
-    public Playlist(){
-
+    public Playlist() {
     }
 
-    public Playlist(int playlistId, String playlistPersistenceId, String playlistName, List<Track> tracks) {
+    public Playlist(List<Track> tracks, int playlistId, String playlistPersistenceId, String playlistName, Library library) {
+        this.tracks = tracks;
         this.playlistId = playlistId;
         this.playlistPersistenceId = playlistPersistenceId;
         this.playlistName = playlistName;
-        this.tracks = tracks;
+        this.library = library;
     }
 
     public int getId() {
@@ -78,6 +81,13 @@ public class Playlist {
         this.tracks = tracks;
     }
 
+    public Library getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
 
 }
 

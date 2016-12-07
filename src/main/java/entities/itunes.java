@@ -1,3 +1,4 @@
+/*
 package entities;
 
 import javax.persistence.Entity;
@@ -275,3 +276,4 @@ public class itunes {
         this.libraryFolderCount = libraryFolderCount;
     }
 }
+*/
