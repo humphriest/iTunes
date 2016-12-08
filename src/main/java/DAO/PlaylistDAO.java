@@ -42,6 +42,10 @@ public class PlaylistDAO {
             return playlists.get(0);
     }*/
 
+    public void mergePlaylist(Playlist playlist){
+        persistenceUtil.merge(playlist);
+    }
+
     public void createPlaylist(Playlist playlist){
         persistenceUtil.persist(playlist);
     }

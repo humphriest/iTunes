@@ -40,27 +40,18 @@ public class RestApi {
         libraryDAO.createLibrary(libPersist);
 
         List<Track> trackList = xmlParser.getTracks();
-        List<Playlist> playlistList = xmlParser.getPlaylists();
 
-
-        for(Playlist p : playlistList){
-            p.setLibrary(libPersist);
-//            System.out.println(p.getPlaylistPersistenceId() + "Bemi was here");
-//            ArrayList<Track> toBeRemoved = new ArrayList<>();
-//            for(Track pt: p.getTracks()){
-//                for(Track t: trackList){
-//                    if(pt.getTrack_id() == t.getTrack_id()){
-//                        toBeRemoved.add(t);
-//                    }
-//                }
-//                pt.setLibrary(libPersist);
-//            }
-//            trackList.removeAll(toBeRemoved);
-            playlistDAO.createPlaylist(p);
-        }
         for (Track aTrackList : trackList) {
+            aTrackList.setLibrary(libPersist);
             trackDao.createTrack(aTrackList);
         }
+        List<Track> trackslist = trackDao.findByLibray(libPersist);
+        List<Playlist> playlistList = xmlParser.getPlaylists(trackslist);
+        for(Playlist p : playlistList){
+            p.setLibrary(libPersist);
+            playlistDAO.mergePlaylist(p);
+        }
+
 
 
         return "Parsed";

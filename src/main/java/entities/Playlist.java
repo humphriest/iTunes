@@ -19,7 +19,7 @@ public class Playlist {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.MERGE})
     private List<Track> tracks;
 
     private int playlistId;

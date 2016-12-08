@@ -4,6 +4,7 @@ import javax.persistence.*;
 @NamedQueries( {
         @NamedQuery(name = "Track.findAll", query = "select o from Track o"),
         @NamedQuery(name = "Track.findByID", query = "select o from Track o where o.track_id=:track_id"),
+        @NamedQuery(name = "Track.findByLibrary", query = "select o from Track o where o.library=:library"),
 })
 
 @Entity

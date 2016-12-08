@@ -23,8 +23,7 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 
-    public List<Playlist> getPlaylists() {
-        List<Track> trackslist = getTracks();
+    public List<Playlist> getPlaylists(List<Track> trackslist) {
         System.out.println(trackslist.size()+" here");
         ArrayList<Playlist> playlists = new ArrayList<>();
         Playlist playlist;
